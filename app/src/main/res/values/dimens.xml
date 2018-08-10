@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_size">20dp</dimen>
+    <dimen name="header_size1">25dp</dimen>
+    <dimen name="header_size2">8dp</dimen>
+</resources>

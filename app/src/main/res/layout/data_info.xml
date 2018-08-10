@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:src="@drawable/dots" />
+
+            <com.example.gagan.resumebuilder.views.CustomEditTextView
+                android:id="@+id/tv_year"
+                android:textSize="18dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="2015 - 2016"
+                android:textColor="@color/colorBackgroundPallet" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <com.example.gagan.resumebuilder.views.CustomEditTextView
+                android:id="@+id/heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="asdas dasda"
+                android:textColor="@color/colorBackgroundPallet"
+                android:textSize="@dimen/header_size"
+                android:textStyle="bold" />
+
+            <com.example.gagan.resumebuilder.views.CustomEditTextView
+                android:id="@+id/info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="k asldj asdjla ldjla jasjsd lajsldj kjajhsd jkasds kj asl ljdas lsasdljal ljldasjs sdd ljlasdj jskjkad" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/delete_card" />
+</RelativeLayout>

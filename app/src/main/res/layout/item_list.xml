@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner"
+    android:gravity="center"
+    android:paddingRight="3dp"
+    android:paddingLeft="3dp"
+    android:id="@+id/id_item_val"
+    android:layout_gravity="center"
+    android:text="adasdasda"
+    android:singleLine="true"
+    android:textColor="@color/colorBackgroundPallet"
+    android:textSize="@dimen/header_size">
+
+</TextView>
