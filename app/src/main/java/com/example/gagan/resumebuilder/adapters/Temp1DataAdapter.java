@@ -18,9 +18,11 @@ import java.util.List;
 
 public class Temp1DataAdapter extends RecyclerView.Adapter<Temp1DataAdapter.VH> {
     private final List<Temp1BaseModel> mDataset;
+    private final boolean isVissible;
 
-    public Temp1DataAdapter(List<Temp1BaseModel> modelList) {
+    public Temp1DataAdapter(List<Temp1BaseModel> modelList, boolean isVissible) {
         this.mDataset = modelList;
+        this.isVissible = isVissible;
     }
 
     @Override
@@ -38,7 +40,7 @@ public class Temp1DataAdapter extends RecyclerView.Adapter<Temp1DataAdapter.VH> 
     @Override
     public int getItemViewType(int position) {
         return mDataset.get(position) instanceof Header ?
-                        R.layout.header_info : R.layout.data_info;
+                R.layout.header_info : R.layout.data_info;
     }
 
     @Override
@@ -63,6 +65,7 @@ public class Temp1DataAdapter extends RecyclerView.Adapter<Temp1DataAdapter.VH> 
                 image = itemView.findViewById(R.id.image);
                 button = itemView.findViewById(R.id.ic_add);
                 button.setOnClickListener(this);
+                button.setVisibility(isVissible ? View.VISIBLE : View.GONE);
                 header.setText(((Header) temp1BaseModel).getTitle());
                 image.setImageDrawable(itemView.getContext().getResources()
                         .getDrawable(((Header) temp1BaseModel).getDrawable()));
@@ -81,6 +84,7 @@ public class Temp1DataAdapter extends RecyclerView.Adapter<Temp1DataAdapter.VH> 
                 info.setText(obj.getDescription());
                 tv_year.setText(obj.getYear());
                 iv_delete.setOnClickListener(this);
+                iv_delete.setVisibility(isVissible ? View.VISIBLE : View.GONE);
             }
         }
 

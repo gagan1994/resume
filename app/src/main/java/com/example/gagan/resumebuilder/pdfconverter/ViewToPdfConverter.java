@@ -92,21 +92,24 @@ public class ViewToPdfConverter {
 //Then take the screen shot
         Bitmap screen;
 
-        screen = Bitmap.createBitmap(view.getDrawingCache());
+        screen = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+
         view.setDrawingCacheEnabled(false);
 
 //Now create the name of your PDF file that you will generate
         File pdfFile = new File(pdfDir, FileNameWithoutExt);
         try {
-            Document document = new Document();
 
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            screen.compress(Bitmap.CompressFormat.JPEG, 10, stream);
+            Image image = Image.getInstance(stream.toByteArray());
+            image.setAbsolutePosition(0, 0);
+            Document document = new Document(image);
             PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
             document.open();
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            screen.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            addImage(document, byteArray);
+            document.add(image);
             document.close();
+
         } catch (Exception e) {
             e.printStackTrace();
             return false;

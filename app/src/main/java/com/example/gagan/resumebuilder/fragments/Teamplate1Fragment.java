@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,6 +17,8 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,6 +36,7 @@ import com.example.gagan.resumebuilder.models.Header;
 import com.example.gagan.resumebuilder.models.Information;
 import com.example.gagan.resumebuilder.models.ItemList;
 import com.example.gagan.resumebuilder.models.SkillsInfo;
+import com.example.gagan.resumebuilder.pdfconverter.ViewToPdfConverter;
 import com.example.gagan.resumebuilder.picassohelper.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -51,15 +55,17 @@ public class Teamplate1Fragment extends Fragment implements View.OnClickListener
     RecyclerView rv_user_details, rv_data, rv_data2, rv_data3;
     View layout;
     ImageView profile, iv_edit;
-    private final List<Temp1BaseModel> modelList = new ArrayList<>();
-    private final List<Temp1BaseModel> infoList = new ArrayList<>();
-    private final List<Temp1BaseModel> infoList2 = new ArrayList<>();
-    private final List<Temp1BaseModel> infoList3 = new ArrayList<>();
+    public final List<Temp1BaseModel> modelList = new ArrayList<>();
+    public final List<Temp1BaseModel> infoList = new ArrayList<>();
+    public final List<Temp1BaseModel> infoList2 = new ArrayList<>();
+    public final List<Temp1BaseModel> infoList3 = new ArrayList<>();
     private Temp1Adapter adapter;
     private File imageFile;
     private Temp1DataAdapter adapter2;
     private Temp1DataAdapter adapter1;
     private Temp1SkillsAdapter adapter3;
+    private View mView;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,11 +81,11 @@ public class Teamplate1Fragment extends Fragment implements View.OnClickListener
         rv_data3 = view.findViewById(R.id.rv_data3);
         View skillsLayout = view.findViewById(R.id.header_info);
         initSkillsLayout(skillsLayout);
+        this.mView = view.findViewById(R.id.view_complete);
 //        https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg
         Picasso.get()
                 .load("https://2.bp.blogspot.com/-8ytYF7cfPkQ/WkPe1-rtrcI/AAAAAAAAGqU/FGfTDVgkcIwmOTtjLka51vineFBExJuSACLcBGAs/s320/31.jpg")
                 .transform(new CircleTransform()).into(profile);
-
         initListners();
         initDatas();
         initInfo();
@@ -130,13 +136,13 @@ public class Teamplate1Fragment extends Fragment implements View.OnClickListener
         rv_user_details.setAdapter(adapter);
 
 
-        adapter1 = new Temp1DataAdapter(infoList);
+        adapter1 = new Temp1DataAdapter(infoList,true);
         rv_data.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_data.addItemDecoration(new SpacesItemDecoration(10));
         rv_data.setAdapter(adapter1);
 
 
-        adapter2 = new Temp1DataAdapter(infoList2);
+        adapter2 = new Temp1DataAdapter(infoList2,true);
         rv_data2.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_data2.addItemDecoration(new SpacesItemDecoration(10));
         rv_data2.setAdapter(adapter2);
@@ -234,4 +240,16 @@ public class Teamplate1Fragment extends Fragment implements View.OnClickListener
         return filePath;
     }
 
+
+    public void OnGeneratingPdf() {
+        ViewToPdfConverter viewToPdfConverter = new ViewToPdfConverter
+                .ViewToPdfBuilder().setPathToStore("Resume")
+                .setFileNameWithoutExt("resume").build();
+
+        if (viewToPdfConverter.generatePdf(mView)) {
+//            filePath = viewToPdfConverter.getFilePath();
+//            fileName = viewToPdfConverter.getFileName();
+        }
+
+    }
 }

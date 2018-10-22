@@ -18,9 +18,10 @@
 
         <TextView
             android:id="@+id/tv_header_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="258dp"
+            android:layout_height="37dp"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="26dp"
             android:layout_toLeftOf="@+id/ic_add"
             android:layout_toRightOf="@+id/image"
             android:text="INFO"
